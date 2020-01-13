@@ -46,8 +46,8 @@ type Options = {
 
 The rule accepts a single object as options, with the key `types`.
 
-- The keys should match the types you want to ban. The type can either be a type name literal (`Foo`), a type name with generic parameter instantiations(s) (`Foo<Bar>`), or the empty object literal (`{}`).
-- The value can be an object with the following properties:
+- The keys should match the types you want to ban. The type can either be a type name literal (`Foo`), a type name with generic parameter instantiation(s) (`Foo<Bar>`), or the empty object literal (`{}`).
+- The values can be an object with the following properties:
   - `message: string` - the message to display when the type is matched.
   - `fixWith?: string` - a string to replace the banned type with when the fixer is run. If this is omitted, no fix will be done.
 

@@ -27,6 +27,7 @@ const options: InferOptionsTypeFromRule<typeof rule> = [
 ruleTester.run('ban-types', rule, {
   valid: [
     'let f = Object();', // Should not fail, as it is not a type position
+    'let f = {};',
     'let f: { x: number, y: number } = { x: 1, y: 1 };',
     {
       code: 'let f = Object();',
