@@ -58,7 +58,7 @@ The rule accepts a single object as options, with the key `types`.
     "@typescript-eslint/ban-types": ["error", {
         "types": {
             // add a custom message to help explain why not to use it
-            "Foo": "Don't use bar!",
+            "Foo": "Don't use Foo!",
 
             // add a custom message, AND tell the plugin how to fix it
             "String": {
@@ -77,18 +77,18 @@ The rule accepts a single object as options, with the key `types`.
 
 ### Default Options
 
-The default options provides a set of "best practices", intended to provide safety and standardization in your codebase:
+The default options provide a set of "best practices", intended to provide safety and standardization in your codebase:
 
-- Don't use the upper case primitive types, you should use the lower-case types for consistency.
+- Don't use the upper-case primitive types, you should use the lower-case types for consistency.
 - Avoid the `Function` type, as it provides little safety for the following reasons:
-  - It provides no type-safety when calling the value, which means it's easy to provide the wrong arguments.
+  - It provides no type safety when calling the value, which means it's easy to provide the wrong arguments.
   - It accepts class declarations, which will fail when called, as they are called without the `new` keyword.
-- Avoid the `Object` and `{}` types, as they means "any non-nullish value".
+- Avoid the `Object` and `{}` types, as they mean "any non-nullish value".
   - This is a point of confusion for many developers, who think it means "any object type".
-- Avoid the `object`, as it is currently hard to use due to not being able to assert that keys exist.
+- Avoid the `object` type, as it is currently hard to use due to not being able to assert that keys exist.
   - See [microsoft/TypeScript#21732](https://github.com/microsoft/TypeScript/issues/21732).
 
-**_Important note:_** the default options suggests using `Record<string, unknown>`; this was a stylistic decision, as the built-in `Record` type is considered to look cleaner.
+**_Important note:_** the default options suggest using `Record<string, unknown>`; this was a stylistic decision, as the built-in `Record` type is considered to look cleaner.
 
 ## Compatibility
 
