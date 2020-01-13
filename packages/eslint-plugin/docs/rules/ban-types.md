@@ -31,17 +31,34 @@ class Foo<F = string> extends Bar<string> implements Baz<string> {
 
 ## Options
 
-The banned type can either be a type name literal (`Foo`), a type name with generic parameter instantiations(s) (`Foo<Bar>`), or the empty object literal (`{}`).
+```ts
+type Options = {
+  types: {
+    [typeName: string]:
+      | string
+      | {
+          message: string;
+          fixWith?: string;
+        };
+  };
+};
+```
 
-```CJSON
+The rule accepts a single object as options, with the key `types`.
+
+- The keys should match the types you want to ban. The type can either be a type name literal (`Foo`), a type name with generic parameter instantiations(s) (`Foo<Bar>`), or the empty object literal (`{}`).
+- The value can be an object with the following properties:
+  - `message: string` - the message to display when the type is matched.
+  - `fixWith?: string` - a string to replace the banned type with when the fixer is run. If this is omitted, no fix will be done.
+
+### Example config
+
+```JSONC
 {
     "@typescript-eslint/ban-types": ["error", {
         "types": {
-            // report usages of the type using the default error message
-            "Foo": null,
-
             // add a custom message to help explain why not to use it
-            "Bar": "Don't use bar!",
+            "Foo": "Don't use bar!",
 
             // add a custom message, AND tell the plugin how to fix it
             "String": {
@@ -58,25 +75,20 @@ The banned type can either be a type name literal (`Foo`), a type name with gene
 }
 ```
 
-### Example
+### Default Options
 
-```json
-{
-  "@typescript-eslint/ban-types": [
-    "error",
-    {
-      "types": {
-        "Array": null,
-        "Object": "Use {} instead",
-        "String": {
-          "message": "Use string instead",
-          "fixWith": "string"
-        }
-      }
-    }
-  ]
-}
-```
+The default options provides a set of "best practices", intended to provide safety and standardization in your codebase:
+
+- Don't use the upper case primitive types, you should use the lower-case types for consistency.
+- Avoid the `Function` type, as it provides little safety for the following reasons:
+  - It provides no type-safety when calling the value, which means it's easy to provide the wrong arguments.
+  - It accepts class declarations, which will fail when called, as they are called without the `new` keyword.
+- Avoid the `Object` and `{}` types, as they means "any non-nullish value".
+  - This is a point of confusion for many developers, who think it means "any object type".
+- Avoid the `object`, as it is currently hard to use due to not being able to assert that keys exist.
+  - See [microsoft/TypeScript#21732](https://github.com/microsoft/TypeScript/issues/21732).
+
+**_Important note:_** the default options suggests using `Record<string, unknown>`; this was a stylistic decision, as the built-in `Record` type is considered to look cleaner.
 
 ## Compatibility
 
