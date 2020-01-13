@@ -15,7 +15,7 @@ export interface Extra {
   filePath: string;
   jsx: boolean;
   loc: boolean;
-  log: Function;
+  log: (message: string) => void;
   preserveNodeMaps?: boolean;
   projects: string[];
   range: boolean;
@@ -93,7 +93,7 @@ export interface TSESTreeOptions {
    * When value is `false`, no logging will occur.
    * When value is not provided, `console.log()` will be used.
    */
-  loggerFn?: Function | false;
+  loggerFn?: ((message: string) => void) | false;
 
   /**
    * Allows the user to control whether or not two-way AST node maps are preserved

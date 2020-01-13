@@ -202,7 +202,7 @@ function applyParserOptionsToExtra(options: TSESTreeOptions): void {
   if (typeof options.loggerFn === 'function') {
     extra.log = options.loggerFn;
   } else if (options.loggerFn === false) {
-    extra.log = Function.prototype;
+    extra.log = (): void => {};
   }
 
   if (typeof options.project === 'string') {
@@ -283,8 +283,11 @@ function warnAboutTSVersion(): void {
 // Parser
 //------------------------------------------------------------------------------
 
+// the `{}` is safe in here, because {} & TSESTree.Program === TSESTree.Program
 type AST<T extends TSESTreeOptions> = TSESTree.Program &
+  // eslint-disable-next-line @typescript-eslint/ban-types
   (T['tokens'] extends true ? { tokens: TSESTree.Token[] } : {}) &
+  // eslint-disable-next-line @typescript-eslint/ban-types
   (T['comment'] extends true ? { comments: TSESTree.Comment[] } : {});
 
 interface ParseAndGenerateServicesResult<T extends TSESTreeOptions> {

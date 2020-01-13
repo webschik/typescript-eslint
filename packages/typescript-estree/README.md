@@ -88,7 +88,7 @@ interface ParseOptions {
    * When value is `false`, no logging will occur.
    * When value is not provided, `console.log()` will be used.
    */
-  loggerFn?: Function | false;
+  loggerFn?: ((message: string) => void) | false;
 
   /**
    * Controls whether the `range` property is included on AST nodes.

@@ -58,7 +58,7 @@ export default util.createRule<Options, MessageIds>({
     },
     fixable: 'code',
     messages: {
-      bannedTypeMessage: "Don't use '{{name}}' as a type.{{customMessage}}",
+      bannedTypeMessage: "Don't use `{{name}}` as a type.{{customMessage}}",
     },
     schema: [
       {

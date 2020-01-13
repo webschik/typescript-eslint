@@ -173,7 +173,7 @@ interface RuleContext<
    * The shared settings from configuration.
    * We do not have any shared settings in this plugin.
    */
-  settings: {};
+  settings: Record<string, unknown>;
   /**
    * The name of the parser from configuration.
    */

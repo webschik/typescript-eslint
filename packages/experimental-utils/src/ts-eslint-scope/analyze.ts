@@ -7,12 +7,12 @@ interface AnalysisOptions {
   ignoreEval?: boolean;
   nodejsScope?: boolean;
   impliedStrict?: boolean;
-  fallback?: string | ((node: {}) => string[]);
+  fallback?: string | ((node: Record<string, unknown>) => string[]);
   sourceType?: 'script' | 'module';
   ecmaVersion?: number;
 }
 const analyze = ESLintAnalyze as (
-  ast: {},
+  ast: Record<string, unknown>,
   options?: AnalysisOptions,
 ) => ScopeManager;
 
