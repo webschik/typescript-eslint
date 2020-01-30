@@ -178,7 +178,11 @@ declare module 'eslint/lib/rules/no-implicit-globals' {
   import { TSESLint, TSESTree } from '@typescript-eslint/experimental-utils';
 
   const rule: TSESLint.RuleModule<
-    never,
+    | 'globalNonLexicalBinding'
+    | 'globalLexicalBinding'
+    | 'globalVariableLeak'
+    | 'assignmentToReadonlyGlobal'
+    | 'redeclarationOfReadonlyGlobal',
     [],
     {
       Program(node: TSESTree.Program): void;
@@ -231,7 +235,7 @@ declare module 'eslint/lib/rules/no-restricted-globals' {
   import { TSESLint, TSESTree } from '@typescript-eslint/experimental-utils';
 
   const rule: TSESLint.RuleModule<
-    never,
+    'defaultMessage' | 'customMessage',
     (
       | string
       | {
@@ -250,7 +254,7 @@ declare module 'eslint/lib/rules/no-shadow' {
   import { TSESLint, TSESTree } from '@typescript-eslint/experimental-utils';
 
   const rule: TSESLint.RuleModule<
-    never,
+    'noShadow',
     [
       {
         builtinGlobals?: boolean;
@@ -328,26 +332,6 @@ declare module 'eslint/lib/rules/no-unused-expressions' {
   export = rule;
 }
 
-declare module 'eslint/lib/rules/no-use-before-define' {
-  import { TSESLint, TSESTree } from '@typescript-eslint/experimental-utils';
-
-  const rule: TSESLint.RuleModule<
-    never,
-    (
-      | 'nofunc'
-      | {
-          functions?: boolean;
-          classes?: boolean;
-          variables?: boolean;
-        }
-    )[],
-    {
-      ArrowFunctionExpression(node: TSESTree.ArrowFunctionExpression): void;
-    }
-  >;
-  export = rule;
-}
-
 declare module 'eslint/lib/rules/strict' {
   import { TSESLint, TSESTree } from '@typescript-eslint/experimental-utils';
 
@@ -374,7 +358,7 @@ declare module 'eslint/lib/rules/no-useless-constructor' {
   import { TSESLint, TSESTree } from '@typescript-eslint/experimental-utils';
 
   const rule: TSESLint.RuleModule<
-    never,
+    'noUselessConstructor',
     [],
     {
       MethodDefinition(node: TSESTree.MethodDefinition): void;
@@ -440,7 +424,7 @@ declare module 'eslint/lib/rules/require-await' {
   import { TSESLint, TSESTree } from '@typescript-eslint/experimental-utils';
 
   const rule: TSESLint.RuleModule<
-    never,
+    'missingAwait',
     [],
     {
       FunctionDeclaration(node: TSESTree.FunctionDeclaration): void;
@@ -463,7 +447,7 @@ declare module 'eslint/lib/rules/semi' {
   import { TSESLint, TSESTree } from '@typescript-eslint/experimental-utils';
 
   const rule: TSESLint.RuleModule<
-    never,
+    'missingSemi' | 'extraSemi',
     [
       'always' | 'never',
       {
@@ -493,7 +477,7 @@ declare module 'eslint/lib/rules/quotes' {
   import { TSESLint, TSESTree } from '@typescript-eslint/experimental-utils';
 
   const rule: TSESLint.RuleModule<
-    never,
+    'wrongQuotes',
     [
       'single' | 'double' | 'backtick',
       {
