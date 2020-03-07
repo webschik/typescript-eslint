@@ -1577,10 +1577,7 @@ export class Converter {
         });
 
       case SyntaxKind.ExportDeclaration:
-        if (node.exportClause) {
-          if (node.exportClause.kind !== SyntaxKind.NamedExports) {
-            throw new Error('`export * as ns` is not yet supported.');
-          }
+        if (node.exportClause?.kind === SyntaxKind.NamedExports) {
           return this.createNode<TSESTree.ExportNamedDeclaration>(node, {
             type: AST_NODE_TYPES.ExportNamedDeclaration,
             source: this.convertChild(node.moduleSpecifier),
@@ -1593,6 +1590,10 @@ export class Converter {
           return this.createNode<TSESTree.ExportAllDeclaration>(node, {
             type: AST_NODE_TYPES.ExportAllDeclaration,
             source: this.convertChild(node.moduleSpecifier),
+            exported:
+              node.exportClause?.kind === SyntaxKind.NamespaceExport
+                ? this.convertChild(node.exportClause.name)
+                : null,
           });
         }
 

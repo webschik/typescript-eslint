@@ -422,6 +422,11 @@ tester.addFixturePatternConfig('typescript/basics', {
      */
     'abstract-class-with-declare-properties',
     'class-with-declare-properties',
+    /**
+     * TS 3.8 export * as namespace
+     * babel uses a representation that does not match the ESTree spec: https://github.com/estree/estree/pull/205
+     */
+    'export-star-as-ns-from',
   ],
   ignoreSourceType: [
     /**

@@ -248,6 +248,15 @@ export function preprocessBabylonAST(ast: BabelTypes.File): any {
           node.asserts = false;
         }
       },
+      /**
+       * TS 3.8 export * as namespace
+       * babel uses a representation that does not match the ESTree spec: https://github.com/estree/estree/pull/205
+       */
+      ExportAllDeclaration(node) {
+        if (!node.exported) {
+          node.exported = null;
+        }
+      },
     },
   );
 }

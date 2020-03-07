@@ -868,6 +868,7 @@ export interface EmptyStatement extends BaseNode {
 export interface ExportAllDeclaration extends BaseNode {
   type: AST_NODE_TYPES.ExportAllDeclaration;
   source: Expression | null;
+  exported: Identifier | null;
 }
 
 export interface ExportDefaultDeclaration extends BaseNode {
